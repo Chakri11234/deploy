@@ -130,31 +130,38 @@
   <section id="contact" class="bg-white text-blue-900 py-12">
     <div class="container mx-auto px-6 max-w-3xl text-center">
       <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
-      <p>If you have questions, suggestions, or want to collaborate, feel free to reach out! 
-        Note: This page is only for reference</p>
+      <p>If you have questions, suggestions, or want to collaborate, feel free to reach out!</p>
       <p class="mt-4 font-semibold">Email: <a href="mailto:xxxxxxx@rhinoplastyai.com" class="text-blue-500 hover:underline">xxxxxxx@rhinoplastyai.com</a></p>
     </div>
   </section>
 
   <!-- Script -->
   <script>
-    const menuBtn = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
+  // Toggle mobile menu
+  const menuBtn = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
 
-    // Launch button logic
-    const launchBtn = document.getElementById('launch-btn');
-    launchBtn.addEventListener('click', () => {
+  // Launch button logic
+  const launchBtn = document.getElementById('launch-btn');
+  launchBtn.addEventListener('click', () => {
+    try {
       const user = JSON.parse(localStorage.getItem("loggedInUser"));
-      if (user) {
+
+      // Check if user object exists and has username/email
+      if (user && user.fullname && user.email) {
         window.open("https://3e670d69bd808c2fa6.gradio.live", "_blank");
       } else {
-        alert("Please login to access the AI tool.");
-        window.location.href = "login.html";
+        throw new Error("Invalid user object");
       }
-    });
-  </script>
+    } catch (e) {
+      alert("Please login to access the AI tool.");
+      window.location.href = "login.html";
+    }
+  });
+</script>
+
 </body>
 </html>
