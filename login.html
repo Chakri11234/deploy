@@ -117,7 +117,7 @@
     </section>
   </main>
 
-  <!-- JavaScript for normal login -->
+  <!-- JavaScript for login -->
   <script>
     document.getElementById('login-form').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -127,8 +127,9 @@
       const found = users.find(user => user.username === name && user.password === password);
 
       if (found) {
+        localStorage.setItem('loggedInUser', JSON.stringify(found)); // Store user data
         alert("Login successful!");
-        window.location.href = "https://3e670d69bd808c2fa6.gradio.live"; // Replace with your Gradio link
+        window.location.href = "loggedinpage.html"; // Redirect to logged-in homepage
       } else {
         alert("Incorrect username or password.");
       }
@@ -137,8 +138,14 @@
     // Google Sign-In Callback
     function handleGoogleSignIn(response) {
       const userInfo = parseJwt(response.credential);
-      alert(`Welcome ${userInfo.name || userInfo.email}!`);
-      window.location.href = "https://3e670d69bd808c2fa6.gradio.live"; // Redirect after successful Google login
+      const user = {
+        fullName: userInfo.name,
+        email: userInfo.email,
+        username: userInfo.email.split("@")[0]
+      };
+      localStorage.setItem('loggedInUser', JSON.stringify(user));
+      alert(`Welcome ${user.fullName || user.username}!`);
+      window.location.href = "loggedinpage.html"; // Redirect
     }
 
     // Helper to decode JWT token
@@ -148,7 +155,6 @@
       const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
       }).join(''));
-
       return JSON.parse(jsonPayload);
     }
   </script>

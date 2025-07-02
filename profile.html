@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 40px;
+      background-color: #f4f4f4;
+    }
+    .logo {
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      color: #007bff;
+    }
+    .profile-container {
+      display: flex;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      width: 800px;
+      margin: auto;
+      padding: 30px;
+    }
+    .profile-pic {
+      flex: 1;
+      text-align: center;
+    }
+    .profile-pic img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+    .profile-info {
+      flex: 2;
+      padding-left: 30px;
+    }
+    .profile-info h3 {
+      margin: 0 0 10px;
+    }
+    .profile-info p {
+      margin: 8px 0;
+      font-size: 16px;
+    }
+    .button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    input[type="file"] {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo">👤 User Profile</div>
+
+  <div class="profile-container">
+    <div class="profile-pic">
+      <img id="profile-img" src="https://via.placeholder.com/140" alt="Profile Picture" />
+      <input type="file" accept="image/*" id="upload-img" />
+    </div>
+    <div class="profile-info">
+      <h3 id="fullName">Full Name: </h3>
+      <p id="email">Email: </p>
+      <p id="username">Username: </p>
+    </div>
+  </div>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (!user) {
+      alert("No user logged in. Redirecting to login page.");
+      window.location.href = "login.html";
+    } else {
+      document.getElementById("fullName").innerText = "Full Name: " + (user.fullname || "N/A");
+      document.getElementById("email").innerText = "Email: " + (user.email || "N/A");
+      document.getElementById("username").innerText = "Username: " + (user.username || "N/A");
+
+      const storedImg = localStorage.getItem("profileImage");
+      if (storedImg) {
+        document.getElementById("profile-img").src = storedImg;
+      }
+
+      // Handle image upload
+      document.getElementById("upload-img").addEventListener("change", function (e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (evt) {
+            const imgData = evt.target.result;
+            localStorage.setItem("profileImage", imgData);
+            document.getElementById("profile-img").src = imgData;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
