@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Login | Rhinoplasty AI</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <style>
     body {
       background-color: #f7f8fa;
@@ -91,27 +92,38 @@
 
       <div class="mt-8 flex flex-col sm:flex-row items-center justify-between text-sm text-gray-600">
         <a href="signup.html" class="underline hover:text-blue-600 mb-4 sm:mb-0">Create an account</a>
-        <div class="flex items-center space-x-3">
+
+        <div class="flex flex-col items-center gap-3">
           <span>Or login with</span>
-          <a href="#" aria-label="Login with Google" class="social-btn bg-[#DB4437] hover:bg-[#B3372B] flex items-center justify-center w-8 h-8 rounded text-white">
-            <svg fill="currentColor" viewBox="0 0 24 24" class="w-4 h-4">
-              <path d="M21.805 10.023h-9.78v3.954h5.594c-.24 1.23-1.703 3.613-5.594 3.613-3.355 0-6.09-2.773-6.09-6.19s2.735-6.19 6.09-6.19c1.912 0 3.19.81 3.925 1.504l2.668-2.574c-1.693-1.56-3.847-2.516-6.593-2.516-5.574 0-10.097 4.616-10.097 10.302 0 5.686 4.523 10.302 10.097 10.302 5.82 0 9.687-4.073 9.687-9.822 0-.66-.076-1.132-.166-1.433z"/>
-            </svg>
-          </a>
+
+          <!-- Google Sign In Button -->
+          <div id="g_id_onload"
+               data-client_id="644145862104-kndg0amlhd2cupsj2lh9revl3jaqs13v.apps.googleusercontent.com"
+               data-context="signin"
+               data-ux_mode="popup"
+               data-callback="handleGoogleSignIn"
+               data-auto_prompt="false">
+          </div>
+          <div class="g_id_signin"
+               data-type="standard"
+               data-size="large"
+               data-theme="outline"
+               data-text="signin_with"
+               data-shape="rect"
+               data-logo_alignment="left">
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Fixed JavaScript -->
+  <!-- JavaScript for normal login -->
   <script>
     document.getElementById('login-form').addEventListener('submit', function(e) {
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
       const password = document.getElementById('password').value.trim();
-
       const users = JSON.parse(localStorage.getItem('users') || '[]');
-
       const found = users.find(user => user.username === name && user.password === password);
 
       if (found) {
@@ -121,6 +133,24 @@
         alert("Incorrect username or password.");
       }
     });
+
+    // Google Sign-In Callback
+    function handleGoogleSignIn(response) {
+      const userInfo = parseJwt(response.credential);
+      alert(`Welcome ${userInfo.name || userInfo.email}!`);
+      window.location.href = "https://3e670d69bd808c2fa6.gradio.live"; // Redirect after successful Google login
+    }
+
+    // Helper to decode JWT token
+    function parseJwt(token) {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+
+      return JSON.parse(jsonPayload);
+    }
   </script>
 </body>
 </html>
