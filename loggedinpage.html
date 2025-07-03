@@ -26,10 +26,9 @@
       <li><a href="#home" class="nav-link active">Home</a></li>
       <li><a href="#features" class="nav-link">Features</a></li>
       <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
-      <li><a href="#try-now" class="nav-link">Try Now</a></li>
+      <li><a id="try-now-btn" class="cursor-pointer nav-link">Try Now</a></li>
       <li><a href="#contact" class="nav-link">Contact</a></li>
     </ul>
-    <!-- Profile Button -->
     <a href="profile.html" class="flex items-center gap-2 border border-white text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-blue-700 transition hidden md:inline-flex">
       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
         <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
@@ -50,7 +49,7 @@
     <a href="#home" class="block py-1">Home</a>
     <a href="#features" class="block py-1">Features</a>
     <a href="#how-it-works" class="block py-1">How It Works</a>
-    <a href="#try-now" class="block py-1">Try Now</a>
+    <a id="try-now-btn-mobile" class="block py-1 cursor-pointer">Try Now</a>
     <a href="#contact" class="block py-1">Contact</a>
     <a href="profile.html" class="block mt-2 py-2 text-center border border-white rounded-full">Profile</a>
   </div>
@@ -65,7 +64,7 @@
         Upload your side-profile and visualize nose reshaping with advanced AI — before surgery.
       </p>
       <div class="flex items-center gap-6">
-        <a href="#try-now" class="bg-white text-blue-700 px-6 py-2 rounded-full text-sm font-semibold transition duration-300 hover:bg-blue-100">Try It Now</a>
+        <a id="try-now-btn-hero" class="cursor-pointer bg-white text-blue-700 px-6 py-2 rounded-full text-sm font-semibold transition duration-300 hover:bg-blue-100">Try It Now</a>
         <a href="#how-it-works" class="flex items-center gap-2 text-white hover:text-blue-300">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" />
@@ -143,16 +142,15 @@
   </section>
 
   <script>
-    // Menu toggle
+    // Toggle menu
     const menuBtn = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     menuBtn.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
     });
 
-    // Launch app logic
-    const launchBtn = document.getElementById('launch-btn');
-    launchBtn.addEventListener('click', () => {
+    // Common launch function
+    function launchApp() {
       const user = JSON.parse(localStorage.getItem("loggedInUser"));
       if (user) {
         window.open("https://b9b9b89e0b41e76188.gradio.live", "_blank");
@@ -160,7 +158,13 @@
         alert("Please login to access the AI tool.");
         window.location.href = "login.html";
       }
-    });
+    }
+
+    // Bind all launch buttons
+    document.getElementById("launch-btn").addEventListener("click", launchApp);
+    document.getElementById("try-now-btn").addEventListener("click", launchApp);
+    document.getElementById("try-now-btn-hero").addEventListener("click", launchApp);
+    document.getElementById("try-now-btn-mobile").addEventListener("click", launchApp);
   </script>
 </body>
 </html>
