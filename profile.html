@@ -14,7 +14,13 @@
 </head>
 <body class="bg-gray-100 p-8 font-sans">
 
-  <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-8">
+  <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-8 relative">
+
+    <!-- Logout Button -->
+    <div class="text-right mb-4">
+      <button id="logout-btn" class="text-red-600 hover:underline text-sm">🚪 Logout</button>
+    </div>
+
     <div class="flex flex-col sm:flex-row items-center gap-8">
       <!-- Profile Picture -->
       <div class="flex flex-col items-center">
@@ -78,7 +84,6 @@
               <option value="Snub">Snub</option>
             </select>
           </label>
-
 
           <label class="sm:col-span-2">
             Medical History (if any)
@@ -157,6 +162,14 @@
         localStorage.setItem("rhinoplastyProfile", JSON.stringify(updated));
         document.getElementById("save-btn").classList.add("hidden");
         alert("Profile updated successfully.");
+      };
+
+      // Logout logic
+      document.getElementById("logout-btn").onclick = () => {
+        localStorage.removeItem("loggedInUser");
+        localStorage.removeItem("rhinoplastyProfile");
+        localStorage.removeItem("profileImage");
+        window.location.href = "index.html";
       };
     }
   </script>
