@@ -56,18 +56,13 @@
         AI-Powered Rhinoplasty <br />Visualization
       </h1>
       <p class="text-blue-200 text-lg max-w-lg">
-        Upload your side-profile and visualize nose reshaping with advanced AI — before surgery.
+        Visualize your ideal nose before surgery using advanced generative AI. Rhinoplasty AI creates photorealistic previews tailored to your facial features — instantly.
       </p>
-      <div class="flex items-center gap-6">
-        <a href="#try-now" class="bg-white text-blue-700 px-6 py-2 rounded-full text-sm font-semibold transition duration-300 hover:bg-blue-100">Try It Now</a>
-        <a href="#how-it-works" class="flex items-center gap-2 text-white hover:text-blue-300">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" />
-            <path d="M10 8l6 4-6 4V8z" fill="currentColor" />
-          </svg>
-          Watch Demo
-        </a>
-      </div>
+      <p class="text-blue-200 text-sm max-w-lg">
+        Whether you're exploring options or helping clients make informed choices, our tool empowers users with clarity, control, and confidence — without any risk.
+      </p>
+      <br>
+      <a href="#try-now" class="bg-white text-blue-700 px-6 py-2 rounded-full text-sm font-semibold transition duration-300 hover:bg-blue-100">Try It Now</a>
     </div>
     <div class="md:w-1/2 flex justify-center">
       <img 
@@ -75,6 +70,27 @@
         alt="AI Nose Reshaping Demo"
         class="max-w-full h-auto rounded-xl shadow-lg"
       />
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section class="bg-white text-blue-900 py-16">
+    <div class="container mx-auto px-6 max-w-5xl">
+      <h2 class="text-3xl font-bold text-center mb-10">💡 Why Choose Rhinoplasty AI?</h2>
+      <div class="grid md:grid-cols-3 gap-8 text-center text-sm md:text-base">
+        <div>
+          <h3 class="font-semibold text-lg mb-2">👃 Hyper-Realistic Nose Visualization</h3>
+          <p>Preview your look with AI-enhanced edits that match your skin tone, lighting, and angles.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-lg mb-2">⚡ Instant Feedback, Zero Downtime</h3>
+          <p>Upload, choose a style, and see results — no wait time, no manual editing, no technical skills needed.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-lg mb-2">🔒 Private & Secure</h3>
+          <p>Images stay on your device. Nothing is stored unless you choose to save it. Full control, always.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -118,11 +134,15 @@
   <section id="try-now" class="bg-blue-800 text-white py-16">
     <div class="container mx-auto px-6 text-center">
       <h2 class="text-3xl font-bold mb-6">🚀 Try Rhinoplasty AI</h2>
-      <p class="mb-8 text-lg">Upload a face image and reshape your nose using AI. No registration needed.</p>
-      <a id="launch-btn"
-         class="cursor-pointer bg-white text-blue-700 px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-100 transition">
-        Launch the App
-      </a>
+      <p class="mb-6 text-lg max-w-xl mx-auto">
+        Whether you're exploring options or helping clients make informed choices, our tool empowers users with clarity, control, and confidence — without any risk.
+      </p>
+      <div class="flex justify-center">
+        <a id="launch-btn"
+           class="bg-white text-blue-700 px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-100 transition">
+          Try It Now
+        </a>
+      </div>
     </div>
   </section>
 
@@ -149,8 +169,6 @@
   launchBtn.addEventListener('click', () => {
     try {
       const user = JSON.parse(localStorage.getItem("loggedInUser"));
-
-      // Check if user object exists and has username/email
       if (user && user.fullname && user.email) {
         window.open("https://3e670d69bd808c2fa6.gradio.live", "_blank");
       } else {
@@ -161,7 +179,7 @@
       window.location.href = "login.html";
     }
   });
-</script>
+  </script>
 
 </body>
 </html>
