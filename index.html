@@ -170,7 +170,7 @@
     try {
       const user = JSON.parse(localStorage.getItem("loggedInUser"));
       if (user && user.fullname && user.email) {
-        window.open("https://afbb8575a10f089439.gradio.live", "_blank");
+        window.open("https://afbb8575a10f089439.gradio.live/", "_blank");
       } else {
         throw new Error("Invalid user object");
       }
